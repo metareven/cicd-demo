@@ -1,3 +1,8 @@
-From jenkins/jenkins:2.222
+FROM node:alpine3.11
 
-EXPOSE 8080 8081 9418
+COPY index.js index.js
+COPY package.json package.json
+
+RUN npm install
+
+ENTRYPOINT node index.js
