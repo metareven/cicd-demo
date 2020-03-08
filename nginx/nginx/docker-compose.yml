@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  web:
+    image: kornkitti/express-hello-world:latest
+  nginx:
+    image: nginx:latest
+    volumes:
+      - type: "bind"
+        source: "./nginx.config"
+        target: "/etc/nginx/nginx.conf"
+networks:
+  default:
+    external:
+      name: demo
