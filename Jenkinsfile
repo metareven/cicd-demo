@@ -1,33 +1,45 @@
-stage('Build') {
-    node {
-        checkout scm
-	echo $env.BRANCH_NAME
-	echo building
-	docker build -t "lars/hello-world:$env.BRANCH_NAME" . 
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        checout scm
+        echo $env.BRANCH_NAME
+        echo "building"
+        sh 'docker build -t "lars/hello-world:$env.BRANCH_NAME" .'
+      }
     }
-}
-
-stage('Dev') {
-    node {
-        docker run -d --name hello-world-$env.BRANCH_NAME lars/hello-world:$env.BRANCH_NAME	
+    
+    stage('Dev') {
+      steps {
+       sh ' docker run -d --name hello-world-$env.BRANCH_NAME lars/hello-world:$env.BRANCH_NAME'	
+      }
     }
-}
 
-stage('Dev Tests') {
-    echo "Testing"
-    docker exec  hello-world-$env.BRANCH_NAME npm run test
-}
+    stage('Dev Tests') {
+      steps {
+        echo "Testing"
+        sh 'docker exec  hello-world-$env.BRANCH_NAME npm run test'
+      }
+    }
 
-milestone 1
-stage('Stage') {
-   echo "deploying to stage"
-}
+    
+    stage('Stage') {
+      steps {
+        echo "deploying to stage"
+      }	
+    }
 
-stage('Stage tests') {
-    echo "Testing"
-}
+     stage('Stage tests') {
+       steps {
+         echo "Testing"
+       }
+    }
 
-milestone 2
-stage ('Production') {
-    echo "deploying to production"
+    stage ('Production') {
+      steps {
+        echo "deploying to production"
+      }	
+    }
+  }
 }
