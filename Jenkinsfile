@@ -11,7 +11,7 @@ pipeline {
     
     stage('Dev') {
       steps {
-       sh ' docker run -d --name hello-world-$GIT_BRANCH lars/hello-world:$GIT_BRANCH'	
+       sh ' docker run -d --network=demo --name hello-world-$GIT_BRANCH lars/hello-world:$GIT_BRANCH'	
       }
     }
 
