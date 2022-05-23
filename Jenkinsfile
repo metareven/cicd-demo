@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        checout scm
+        checkout scm
         echo $env.BRANCH_NAME
         echo "building"
         sh 'docker build -t "lars/hello-world:$env.BRANCH_NAME" .'
