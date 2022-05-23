@@ -1,4 +1,4 @@
-docker run  -d --name jenkins --network=demo -p 8080:8080 -p 50000:50000 -v $PWD/jenkins:/var/jenkins_home jenkins/jenkins:2.348
+docker run  -d --name jenkins --network=demo -p 8080:8080 -p 50000:50000 -v $PWD/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --privileged lars/myjenkins:latest
 
 JENKINS_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' jenkins)
 

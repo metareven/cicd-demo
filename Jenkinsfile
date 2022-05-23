@@ -6,20 +6,20 @@ pipeline {
         checkout scm
         echo env.BRANCH_NAME
         echo "building"
-        sh 'docker build -t "lars/hello-world:$env.BRANCH_NAME" .'
+        sh 'docker build -t "lars/hello-world:$BRANCH_NAME" .'
       }
     }
     
     stage('Dev') {
       steps {
-       sh ' docker run -d --name hello-world-$env.BRANCH_NAME lars/hello-world:$env.BRANCH_NAME'	
+       sh ' docker run -d --name hello-world-$BRANCH_NAME lars/hello-world:$BRANCH_NAME'	
       }
     }
 
     stage('Dev Tests') {
       steps {
         echo "Testing"
-        sh 'docker exec  hello-world-$env.BRANCH_NAME npm run test'
+        sh 'docker exec  hello-world-$BRANCH_NAME npm run test'
       }
     }
 
