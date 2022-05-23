@@ -4,22 +4,22 @@ pipeline {
     stage('Build') {
       steps {
         checkout scm
-        echo env.BRANCH_NAME
+        echo ¤GIT_BRANCH
         echo "building"
-        sh 'docker build -t "lars/hello-world:$BRANCH_NAME" .'
+        sh 'docker build -t "lars/hello-world:$GIT_BRANCH" .'
       }
     }
     
     stage('Dev') {
       steps {
-       sh ' docker run -d --name hello-world-$BRANCH_NAME lars/hello-world:$BRANCH_NAME'	
+       sh ' docker run -d --name hello-world-$GIT_BRANCH lars/hello-world:$GIT_BRANCH'	
       }
     }
 
     stage('Dev Tests') {
       steps {
         echo "Testing"
-        sh 'docker exec  hello-world-$BRANCH_NAME npm run test'
+        sh 'docker exec  hello-world-$GIT_BRANCH npm run test'
       }
     }
 
