@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         checkout scm
-        echo ¤GIT_BRANCH
+        echo $GIT_BRANCH
         echo "building"
         sh 'docker build -t "lars/hello-world:$GIT_BRANCH" .'
       }
