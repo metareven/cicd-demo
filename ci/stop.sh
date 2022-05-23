@@ -1,0 +1,2 @@
+./stopJenkins.sh
+./stopNginx.sh

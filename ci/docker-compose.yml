@@ -1,7 +1,5 @@
 version: "3.3"
 services:
-  web:
-    image: kornkitti/express-hello-world:latest
   nginx:
     image: nginx:latest
     volumes:

@@ -1,0 +1,2 @@
+./startNginx.sh
+./startJenkins.sh

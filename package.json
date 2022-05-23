@@ -4,7 +4,8 @@
   "description": "cicd-demo",
   "main": "index.js",
   "scripts": {
-    "test": "echo 'Running some tests'"
+      "test": "echo 'Running some tests'",
+      "start": "node index.js"
   },
   "repository": {
     "type": "git",
