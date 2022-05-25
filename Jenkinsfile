@@ -10,6 +10,9 @@ pipeline {
     }
     
     stage('Dev') {
+      when {
+        branch 'master'
+      }
       steps {
        sh ' docker kill hello-world-$GIT_BRANCH || echo ""'
        sh ' docker rm hello-world-$GIT_BRANCH || echo ""'
@@ -18,6 +21,9 @@ pipeline {
     }
 
     stage('Dev Tests') {
+      when {
+        branch 'master'
+      }
       steps {
         echo "Testing"
         sh 'docker exec  hello-world-$GIT_BRANCH npm run test'
@@ -26,18 +32,27 @@ pipeline {
 
     
     stage('Stage') {
+      when {
+        branch 'master'
+      }
       steps {
         echo "deploying to stage"
       }	
     }
 
      stage('Stage tests') {
+       when {
+        branch 'master'
+       }
        steps {
          echo "Testing"
        }
     }
 
     stage ('Production') {
+      when {
+        branch 'master'
+      }
       steps {
         echo "deploying to production"
       }	
